@@ -1,0 +1,48 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+  #config.vm.network "private_network", ip: "55.55.55.101"
+  config.vm.synced_folder ".", "/home/vagrant/shared/"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 3072
+    v.cpus = 1        
+  end
+
+  #config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "127.0.0.1"
+  
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 3010, host: 3010, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 3020, host: 3020, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 3030, host: 3030, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 3040, host: 3040, host_ip: "127.0.0.1"
+
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 8081, host: 8081, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 8082, host: 8082, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 8083, host: 8083, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 8084, host: 8084, host_ip: "127.0.0.1"
+
+  config.vm.network "forwarded_port", guest: 9001, host: 9001, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 9092, host: 9092, host_ip: "127.0.0.1"
+
+  config.vm.provision "shell", inline: <<-SHELL    
+    #
+    # Update and install basic linux programs for development
+    #
+    sudo apt-get update     
+    sudo apt-get install -y wget
+    sudo apt-get install -y curl
+    sudo apt-get install -y vim
+    sudo apt-get install -y git    
+    sudo apt-get install -y build-essential
+    sudo apt-get install -y unzip 
+  SHELL
+  
+  config.vm.provision "shell", path: "provision/java-scala.sh"
+  config.vm.provision "shell", path: "provision/node.sh"
+
+end
