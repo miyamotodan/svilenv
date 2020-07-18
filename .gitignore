@@ -1,0 +1,8 @@
+VM_SVIL/projects
+VM_SVIL/.vagrant
+VM_SVIL/tools
+VM_SVIL/ubuntu-xenial-16.04-cloudimg-console.log
+
+VM_DOCKER/ubuntu-xenial-16.04-cloudimg-console.log
+VM_DOCKER/.vagrant
+VM_DOCKER/dockers/wordpress/wp_content
