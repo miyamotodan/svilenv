@@ -5,4 +5,9 @@ VM_SVIL/ubuntu-xenial-16.04-cloudimg-console.log
 
 VM_DOCKER/ubuntu-xenial-16.04-cloudimg-console.log
 VM_DOCKER/.vagrant
+.metals
+.vscode
 VM_DOCKER/dockers/wordpress/wp_content
+VM_DOCKER/projects
+VM_DOCKER/dockers/apache/app
+VM_DOCKER/dockers/apache/conf

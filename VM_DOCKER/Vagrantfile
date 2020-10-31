@@ -4,20 +4,33 @@
 Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/xenial64"
-  #config.vm.network "private_network", ip: "55.55.55.102"
+  config.vm.network "private_network", ip: "55.55.55.102"
   config.vm.synced_folder ".", "/home/vagrant/shared/"
+  config.vm.synced_folder "../VM_SVIL/projects", "/home/vagrant/shared/projects"
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
-    v.cpus = 2
+    v.memory = 3072
+    v.cpus = 1
   end
 
-  config.vm.network "forwarded_port", guest: 9000, host: 9000
-  config.vm.network "forwarded_port", guest: 8080, host: 8080  
-  config.vm.network "forwarded_port", guest: 8081, host: 8081
-  config.vm.network "forwarded_port", guest: 8082, host: 8082
+  #portainer
+  config.vm.network "forwarded_port", guest: 9000, host: 9000, host_ip: "127.0.0.1" 
   
+  config.vm.network "forwarded_port", guest: 80, host: 8000, host_ip: "127.0.0.1"
+  #config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"  
   
+  #wordpress
+  #config.vm.network "forwarded_port", guest: 8081, host: 8081, host_ip: "127.0.0.1"
+  #config.vm.network "forwarded_port", guest: 8082, host: 8082, host_ip: "127.0.0.1"
+  
+  #mysql8 admin
+  config.vm.network "forwarded_port", guest: 8083, host: 8083, host_ip: "127.0.0.1"
+
+  #mysql
+  config.vm.network "forwarded_port", guest: 3306, host: 3306, host_ip: "127.0.0.1"
+  
+  config.vm.network "forwarded_port", guest: 4000, host: 4001, host_ip: "127.0.0.1"
+   
   config.vm.provision "shell", inline: <<-SHELL    
     #
     # Update and install basic linux programs for development

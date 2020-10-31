@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306  
+    volumes:
+      - mysql8-data:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+    ports:
+      - 8083:80
+
+volumes:
+  mysql8-data:
